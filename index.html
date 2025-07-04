@@ -6,16 +6,16 @@
     <title>Central Library, Sir Syed College - Knowledge Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom py-3">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-main-dark py-3 fixed-top shadow-sm">
+        <div class="container-fluid container-xl">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="https://sirsyedcollege.ac.in/public/img/logo/logo-new.svg" alt="Sir Syed College Logo" class="logo-img me-2">
-                Central Library
-            </a>
+                <span class="d-none d-sm-inline">Central Library</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,17 +42,17 @@
     </nav>
 
     <section id="hero-section" class="hero-bg text-white text-center d-flex align-items-center">
-        <div class="container hero-content">
-            <h1 class="display-3 fw-bold mb-3">Welcome to Central Library, Sir Syed College</h1>
-            <p class="lead mb-4">Your Gateway to Knowledge and Discovery. Explore, Learn, Grow.</p>
-            <a href="https://sirsyedcollege.ac.in/central-library/aboutus" class="btn btn-primary-custom btn-lg shadow-lg" target="_blank" rel="noopener noreferrer">
-                Visit Official Library Website <i class="bi bi-arrow-right"></i>
+        <div class="overlay"></div> <div class="container hero-content">
+            <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Welcome to Central Library, Sir Syed College</h1>
+            <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-0.5s">Your Gateway to Knowledge and Discovery. Explore, Learn, Grow.</p>
+            <a href="https://sirsyedcollege.ac.in/central-library/aboutus" class="btn btn-main-accent btn-lg shadow-lg animate__animated animate__zoomIn animate__delay-1s" target="_blank" rel="noopener noreferrer">
+                Visit Official Library Website <i class="bi bi-box-arrow-up-right"></i>
             </a>
         </div>
     </section>
 
-    <main class="container my-5">
-        <section id="library-info" class="mb-5 p-4 rounded-3 shadow-lg bg-white-custom">
+    <main class="container my-5 pt-5">
+        <section id="library-info" class="mb-5 p-4 rounded-3 shadow-lg bg-light-panel animate-on-scroll">
             <h2 class="text-center mb-4 section-title">About Our Library</h2>
             <p>The Central Library of Sir Syed College, Taliparamba, serves as a vibrant hub of academic resources, knowledge sharing, and intellectual growth. With a collection of over 43,000 books, the library supports the learning, teaching, and research needs of students, faculty, research scholars, and staff across all disciplines.</p>
             <p>The library provides a calm and welcoming environment for study, along with a range of services including book lending, reservation facilities, previous year question papers, and a dedicated computer lab with 24 systems for academic use. Our users check in and out using a barcode-based e-gate system, ensuring seamless access and usage tracking.</p>
@@ -60,13 +60,13 @@
             <p>Driven by a commitment to digital transformation and user-focused service, the library continues to adopt innovative tools and technologies, making it a cornerstone of the academic community at Sir Syed College.</p>
         </section>
 
-        <section id="book-suggestion" class="mb-5 p-4 rounded-3 shadow-lg bg-light-custom">
+        <section id="book-suggestion" class="mb-5 p-4 rounded-3 shadow-lg bg-white-panel animate-on-scroll">
             <h2 class="text-center mb-4 section-title">Suggest a Book</h2>
             <p class="text-center mb-4">Have a book you'd love to see in our collection? Let us know! Your suggestions help us grow our collection to better serve your needs.</p>
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdCSfJ4o7O8PrhXHUq4cnYLsd4vRi3YawQf4oE1csDrzVo4DA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </section>
 
-        <section id="student-registration" class="mb-5 p-4 rounded-3 shadow-lg bg-white-custom">
+        <section id="student-registration" class="mb-5 p-4 rounded-3 shadow-lg bg-light-panel animate-on-scroll">
             <h2 class="text-center mb-4 section-title">Book Reservation & WhatsApp Number Registration</h2>
             <p class="text-center mb-4">To confirm your book reservation and enable us to send you WhatsApp notifications about book availability, please provide your Admission Number and WhatsApp Number below.</p>
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc1GPoTLxu1RONEtlKjHRRAmwaiPuzAZkyaK5d4UVOhz-uGLA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
@@ -101,6 +101,22 @@
                     behavior: 'smooth'
                 });
             });
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script>
+        // Basic Intersection Observer for animate-on-scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of element is visible
+
+        document.querySelectorAll('.animate-on-scroll').forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
