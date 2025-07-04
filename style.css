@@ -1,0 +1,46 @@
+/* Basic styling for your branding */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Very light grey */
+    color: #333;
+}
+
+.bg-primary {
+    background-color: #007bff !important; /* A vibrant blue */
+}
+
+.bg-dark {
+    background-color: #343a40 !important; /* Dark grey navbar */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Teal blue for contact */
+}
+
+h1, h2, h3 {
+    color: #0056b3; /* Slightly darker blue for headings */
+}
+
+.container {
+    max-width: 960px; /* Limit content width for better readability */
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+/* Styling for the embedded iframes */
+iframe {
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Subtle shadow */
+    margin-top: 15px;
+    background-color: white; /* Ensure background of iframe area is white */
+}
+
+/* Adjust header padding for smaller screens */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+}
