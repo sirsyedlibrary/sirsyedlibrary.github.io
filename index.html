@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="home-page"> <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top shadow-sm" id="mainNavbar">
+<body class="home-page">
+
+    <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top shadow-sm" id="mainNavbar">
         <div class="container-fluid container-xl">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
                 <img src="https://sirsyedcollege.ac.in/public/img/logo/logo-new.svg" alt="Sir Syed College Logo" class="logo-img me-2">
-                <span class="d-none d-sm-inline brand-text"></span>
+                <span class="d-none d-sm-inline brand-text">Central Library</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -46,8 +48,7 @@
 
     <section id="hero-section" class="hero-bg text-white text-center d-flex align-items-center">
         <div class="overlay"></div> <div class="container hero-content">
-            <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Welcome to Central Library</h1>
-            <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Sir Syed College</h1>
+            <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Welcome to Central Library, Sir Syed College</h1>
             <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-0.5s">Your Gateway to Knowledge and Discovery. Explore, Learn, Grow.</p>
             <div class="social-icons mt-4 animate__animated animate__fadeInUp animate__delay-1.5s">
                 <a href="YOUR_INSTAGRAM_URL_HERE" target="_blank" rel="noopener noreferrer" class="social-icon-link">
@@ -56,6 +57,106 @@
             </div>
         </div>
     </section>
+
+    <main class="container my-5">
+        <section id="key-services" class="text-center mb-5 p-4 rounded-3 shadow-lg bg-white-panel">
+            <h2 class="section-title">Our Key Services</h2>
+            <p class="lead mb-4">Quick access to what you need.</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <a href="suggest.html" class="card h-100 text-decoration-none bg-light-panel text-body border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="bi bi-book-half display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Suggest a Book</h5>
+                            <p class="card-text text-muted">Help us grow our collection.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="reserve.html" class="card h-100 text-decoration-none bg-light-panel text-body border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="bi bi-bookmark-check display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Book Reservation</h5>
+                            <p class="card-text text-muted">Reserve your next read.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="about.html" class="card h-100 text-decoration-none bg-light-panel text-body border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="bi bi-collection display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Our Collection</h5>
+                            <p class="card-text text-muted">Explore our vast resources.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                <div class="col">
+                    <a href="contact.html" class="card h-100 text-decoration-none bg-light-panel text-body border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="bi bi-question-circle display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Ask a Librarian</h5>
+                            <p class="card-text text-muted">Get expert assistance.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                     <a href="#" class="card h-100 text-decoration-none bg-light-panel text-body border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="bi bi-search display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Search Catalog</h5>
+                            <p class="card-text text-muted">Find specific books.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="card h-100 text-decoration-none bg-light-panel text-body border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="bi bi-clipboard-check display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Library Rules</h5>
+                            <p class="card-text text-muted">Understand our guidelines.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="library-info-news" class="mb-5 p-4 rounded-3 shadow-lg bg-white-panel">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <h2 class="section-title text-center text-md-start">Library Updates</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-light-panel d-flex align-items-center">
+                            <i class="bi bi-arrow-right-circle-fill text-accent me-2"></i> New Arrivals: 50+ books added in July!
+                        </li>
+                        <li class="list-group-item bg-light-panel d-flex align-items-center">
+                            <i class="bi bi-arrow-right-circle-fill text-accent me-2"></i> Workshop on Research Databases - August 10th.
+                        </li>
+                        <li class="list-group-item bg-light-panel d-flex align-items-center">
+                            <i class="bi bi-arrow-right-circle-fill text-accent me-2"></i> Extended hours during exam period (check notice board).
+                        </li>
+                        <li class="list-group-item bg-light-panel text-end">
+                            <a href="#" class="btn btn-sm btn-outline-primary">View All News <i class="bi bi-arrow-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="section-title text-center text-md-start">Quick Information</h2>
+                    <div class="card bg-light-panel border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold text-primary"><i class="bi bi-clock-fill me-2"></i>Operating Hours</h5>
+                            <p class="card-text mb-2">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p class="card-text mb-4">Saturday: 10:00 AM - 2:00 PM</p>
+                            <h5 class="card-title fw-bold text-primary"><i class="bi bi-geo-alt-fill me-2"></i>Location</h5>
+                            <p class="card-text mb-2">Central Library, Sir Syed College, Taliparamba, Kerala</p>
+                            <a href="contact.html" class="btn btn-sm btn-outline-primary mt-3">Get Directions <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="text-white py-4 footer-simple-bg">
         <div class="container">
