@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Central Library, Sir Syed College - About Us</title>
-    <!-- Google Fonts: Poppins for headings, Open Sans for body text -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Your Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Fixed Top Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top bg-dark-main-static shadow-sm" id="mainNavbar">
         <div class="container-fluid container-xl">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
@@ -26,7 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
@@ -42,19 +37,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
+                    <li class="nav-item d-flex align-items-center ms-lg-3">
+                        <div class="form-check form-switch my-auto">
+                            <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle">
+                            <label class="form-check-label text-white-50 ms-2" for="darkModeToggle">
+                                <i class="bi bi-sun-fill" id="sunIcon"></i>
+                                <i class="bi bi-moon-fill d-none" id="moonIcon"></i>
+                            </label>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <main class="container my-5 pt-5">
-        <!-- Page Header for internal pages -->
         <section class="page-header text-center py-5 mb-5 rounded-3 shadow-sm bg-light-panel">
             <h1 class="display-4 fw-bold">About Our Library</h1>
             <p class="lead text-muted">Discover the heart of knowledge at Sir Syed College.</p>
         </section>
 
-        <!-- About Library Content -->
         <section id="library-info" class="mb-5 p-4 rounded-3 shadow-lg bg-white-panel">
             <p>The Central Library of Sir Syed College, Taliparamba, serves as a vibrant hub of academic resources, knowledge sharing, and intellectual growth. With a collection of over 43,000 books, the library supports the learning, teaching, and research needs of students, faculty, research scholars, and staff across all disciplines.</p>
             <p>The library provides a calm and welcoming environment for study, along with a range of services including book lending, reservation facilities, previous year question papers, and a dedicated computer lab with 24 systems for academic use. Our users check in and out using a barcode-based e-gate system, ensuring seamless access and usage tracking.</p>
@@ -63,15 +65,50 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center text-white py-4 footer-simple-bg">
+    <footer class="text-white py-4 footer-simple-bg">
         <div class="container">
-            <p class="mb-0 copyright">&copy; 2025 Central Library, Sir Syed College. All rights reserved.</p>
-            <p class="mb-0 powered-by">Powered by <a href="https://muhammedsafvankp.github.io" target="_blank" rel="noopener noreferrer">Muhammed Safvan</a></p>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 copyright">&copy; 2025 Central Library, Sir Syed College. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 powered-by">Powered by <a href="https://muhammedsafvankp.github.io" target="_blank" rel="noopener noreferrer">Muhammed Safvan</a></p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS (bundle with Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const themeToggle = document.getElementById('darkModeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        // Function to set the theme
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                themeToggle.checked = true;
+                sunIcon.classList.add('d-none');
+                moonIcon.classList.remove('d-none');
+            } else {
+                themeToggle.checked = false;
+                sunIcon.classList.remove('d-none');
+                moonIcon.classList.add('d-none');
+            }
+        };
+
+        // Check for saved theme preference on load
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        // Listen for toggle changes
+        themeToggle.addEventListener('change', () => {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
 </body>
 </html>
