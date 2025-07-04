@@ -1,41 +1,60 @@
-/* Color Variables (for easy theme management) */
+/* Color Variables (Managed for Light/Dark Mode) */
 :root {
-    --primary-color: #004d99; /* Deep, academic blue */
-    --secondary-color: #3498db; /* Vibrant blue for accents/buttons */
-    --dark-background: #2c3e50; /* Rich dark blue-grey for solid header/footer */
-    --light-background: #f5f7fa; /* Very subtle light grey background */
-    --panel-white: #ffffff; /* Pure white for content panels */
-    --panel-light: #fefefe; /* Off-white for alternating panels */
-    --text-dark: #34495e; /* Dark grey for body text */
-    --text-light: #ecf0f1; /* Light text on dark backgrounds */
-    --shadow-light: rgba(0, 0, 0, 0.08);
+    /* Light Mode Defaults */
+    --body-bg: #f5f7fa; /* Very subtle light grey background */
+    --text-color: #34495e; /* Dark grey for body text */
+    --header-bg: #2c3e50; /* Rich dark blue-grey for solid header/footer */
+    --footer-bg: #2c3e50;
+    --panel-bg-light: #fefefe; /* Off-white for alternating panels */
+    --panel-bg-white: #ffffff; /* Pure white for content panels */
+    --primary-theme-color: #004d99; /* Deep, academic blue */
+    --accent-color: #3498db; /* Vibrant blue for accents/buttons */
+    --shadow-base: rgba(0, 0, 0, 0.08);
     --shadow-medium: rgba(0, 0, 0, 0.15);
+    --text-on-dark: #ecf0f1; /* Light text on dark backgrounds */
+}
+
+/* Dark Mode Variables */
+html[data-bs-theme="dark"] {
+    --body-bg: #212529; /* Darker grey background */
+    --text-color: #e9ecef; /* Light grey text */
+    --header-bg: #1a1d20; /* Very dark header/footer */
+    --footer-bg: #1a1d20;
+    --panel-bg-light: #2c3034; /* Slightly lighter dark panel */
+    --panel-bg-white: #343a40; /* Medium dark panel */
+    --primary-theme-color: #5d9cec; /* Lighter blue for dark mode contrast */
+    --accent-color: #7ecaff; /* Even lighter blue for dark mode contrast */
+    --shadow-base: rgba(255, 255, 255, 0.05);
+    --shadow-medium: rgba(255, 255, 255, 0.1);
+    --text-on-dark: #e9ecef; /* Ensure text remains light */
 }
 
 /* Global Styles */
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: var(--light-background);
-    color: var(--text-dark);
+    background-color: var(--body-bg);
+    color: var(--text-color);
     line-height: 1.7;
     overflow-x: hidden; /* Prevent horizontal scroll on mobile */
     padding-top: 76px; /* Space for the fixed-top navbar */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
-    color: var(--primary-color);
+    color: var(--primary-theme-color);
     font-weight: 700;
 }
 
-/* Fixed Top Navbar Styling */
-.bg-dark-main-static {
-    background-color: var(--dark-background) !important;
-    box-shadow: 0 4px 15px var(--shadow-light);
+/* Fixed Top Navbar Styling (Default for non-home pages) */
+.navbar {
+    background-color: var(--header-bg) !important;
+    box-shadow: 0 4px 15px var(--shadow-base);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
 .navbar-brand .logo-img {
-    height: 48px; /* Slightly larger logo */
+    height: 48px;
     width: auto;
     filter: drop-shadow(0px 0px 5px rgba(255,255,255,0.3)); /* Subtle glow for white logo */
 }
@@ -43,11 +62,12 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-brand .brand-text {
     font-weight: 700;
     font-size: 1.6rem;
-    color: var(--text-light) !important; /* White text for brand */
+    color: var(--text-on-dark) !important; /* White text for brand */
+    transition: color 0.3s ease;
 }
 
 .navbar-nav .nav-link {
-    color: var(--text-light) !important; /* White links */
+    color: var(--text-on-dark) !important; /* White links */
     font-weight: 500;
     transition: color 0.3s ease, background-color 0.3s ease;
     padding: 0.75rem 1.2rem;
@@ -60,20 +80,54 @@ h1, h2, h3, h4, h5, h6 {
     background-color: rgba(255, 255, 255, 0.1); /* Subtle highlight on hover */
 }
 
+/* Home Page Specific Navbar (Transparent) */
+body.home-page .navbar {
+    background-color: transparent !important;
+    box-shadow: none !important; /* Remove shadow */
+}
+
+body.home-page .navbar-brand .brand-text,
+body.home-page .navbar-nav .nav-link {
+    color: #ffffff !important; /* Ensure white text on banner */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* Add subtle shadow for readability over image */
+}
+
+body.home-page .navbar-nav .nav-link:hover,
+body.home-page .navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly stronger highlight for transparent nav */
+}
+
+/* Theme Toggle Button Styling */
+.form-switch .form-check-input {
+    cursor: pointer;
+    background-color: var(--text-color); /* Matches text in light mode */
+    border-color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+html[data-bs-theme="dark"] .form-switch .form-check-input {
+    background-color: var(--accent-color); /* Accent color in dark mode */
+    border-color: var(--accent-color);
+}
+
+.form-switch .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25); /* Accent color focus ring */
+}
+
 
 /* Hero Section (Only on index.html) */
 .hero-bg {
     background-image: url('https://sirsyedcollege.ac.in/public/img/images/banner.jpg');
     background-size: cover;
     background-position: center;
-    min-height: 650px; /* Tall hero for impact */
+    min-height: 650px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 80px 0;
     text-align: center;
-    color: #ffffff;
+    color: #ffffff; /* Hero text always white for visibility */
     box-shadow: 0 10px 30px var(--shadow-medium);
 }
 
@@ -83,13 +137,13 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)); /* Stronger, darker gradient overlay for text visibility */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
     z-index: 0;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1; /* Bring content above overlay */
+    z-index: 1;
     max-width: 900px;
     padding-top: 20px;
 }
@@ -105,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-content p {
     font-size: 1.6rem;
-    color: var(--text-light);
+    color: var(--text-on-dark);
     max-width: 750px;
     margin: 0 auto 3rem auto;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
@@ -119,21 +173,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-main-accent {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
     color: #fff;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+    box-shadow: 0 6px 20px var(--shadow-medium); /* Use theme shadow */
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .btn-main-accent:hover {
-    background-color: #2980b9;
-    border-color: #2980b9;
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black); /* Darken accent color */
+    border-color: color-mix(in srgb, var(--accent-color) 80%, black);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.7);
+    box-shadow: 0 8px 25px var(--shadow-medium);
 }
 
 /* Social Icons */
@@ -150,7 +204,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .social-icon-link:hover {
-    color: var(--secondary-color);
+    color: var(--accent-color);
     transform: translateY(-5px);
 }
 
@@ -159,30 +213,29 @@ h1, h2, h3, h4, h5, h6 {
 main {
     position: relative;
     z-index: 500;
-    background-color: var(--light-background);
-    padding-top: 0;
+    background-color: var(--body-bg); /* Use theme variable */
 }
 
 main section {
     padding: 50px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-light);
+    box-shadow: 0 10px 30px var(--shadow-base); /* Use theme variable */
     margin-bottom: 60px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth theme transition */
 }
 
 main section:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 40px var(--shadow-medium); /* Use theme variable */
 }
 
 .bg-white-panel {
-    background-color: var(--panel-white);
+    background-color: var(--panel-bg-white); /* Use theme variable */
 }
 
 .bg-light-panel {
-    background-color: var(--panel-light);
-    border: 1px solid #e0e0e0;
+    background-color: var(--panel-bg-light); /* Use theme variable */
+    border: 1px solid color-mix(in srgb, var(--panel-bg-light) 90%, black); /* Border adapts to theme */
 }
 
 .section-title {
@@ -190,7 +243,7 @@ main section:hover {
     margin-bottom: 30px;
     position: relative;
     display: inline-block;
-    color: var(--primary-color);
+    color: var(--primary-theme-color); /* Use theme variable */
 }
 
 .section-title::after {
@@ -198,11 +251,11 @@ main section:hover {
     display: block;
     width: 80px;
     height: 5px;
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color); /* Use theme variable */
     margin: 15px auto 0;
     border-radius: 3px;
     transform: scaleX(0.8);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth theme transition */
 }
 
 .section-title:hover::after {
@@ -211,19 +264,20 @@ main section:hover {
 
 /* Page Header for internal pages (e.g., About, Suggest) */
 .page-header {
-    background-color: var(--panel-white); /* A clean background */
-    margin-top: 20px; /* Space from navbar */
-    padding: 60px 40px !important; /* More vertical padding */
+    background-color: var(--panel-bg-white); /* Use theme variable */
+    margin-top: 20px;
+    padding: 60px 40px !important;
+    transition: background-color 0.3s ease; /* Smooth theme transition */
 }
 
 .page-header h1 {
     font-size: 3.5rem;
-    color: var(--primary-color);
+    color: var(--primary-theme-color); /* Use theme variable */
 }
 
 .page-header p.lead {
     font-size: 1.3rem;
-    color: var(--text-dark);
+    color: var(--text-color); /* Use theme variable */
 }
 
 
@@ -232,51 +286,50 @@ iframe {
     border: none;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 6px 20px var(--shadow-light);
+    box-shadow: 0 6px 20px var(--shadow-base); /* Use theme variable */
     margin-top: 30px;
-    background-color: #ffffff;
+    background-color: var(--panel-bg-white); /* Frame background adapts to theme */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Footer Styling - Simplified */
+/* Footer Styling - Simplified and Left/Right Aligned */
 .footer-simple-bg {
-    background-color: var(--dark-background);
-    color: var(--text-light);
-    padding: 30px 0; /* Reduced padding */
-    box-shadow: 0 -4px 20px var(--shadow-light);
+    background-color: var(--footer-bg); /* Use theme variable */
+    color: var(--text-on-dark); /* Text on dark footer background */
+    padding: 25px 0; /* Reduced padding */
+    box-shadow: 0 -4px 20px var(--shadow-base); /* Use theme variable */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Smooth theme transition */
+}
+
+.footer-simple-bg .container .row {
+    align-items: center; /* Vertically align content */
 }
 
 .footer-simple-bg .copyright {
     font-size: 0.9rem;
-    margin-top: 0; /* Remove top margin */
-    margin-bottom: 5px; /* Small space between copyright and powered by */
+    margin-top: 0;
+    margin-bottom: 0; /* Remove default paragraph margin */
     opacity: 0.8;
 }
 
 .footer-simple-bg .powered-by {
     font-size: 0.85rem;
     opacity: 0.7;
+    text-align: right; /* Default right alignment */
 }
 
 .footer-simple-bg .powered-by a {
-    color: var(--secondary-color); /* Highlight link */
+    color: var(--accent-color); /* Highlight link */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-simple-bg .powered-by a:hover {
-    color: #ffffff; /* White on hover */
+    color: #ffffff; /* White on hover for dark footer */
     text-decoration: underline;
 }
 
-
 /* Responsive Adjustments */
-@media (max-width: 1200px) {
-    .container-xl {
-        padding-left: var(--bs-gutter-x, 0.75rem);
-        padding-right: var(--bs-gutter-x, 0.75rem);
-    }
-}
-
 @media (max-width: 991.98px) {
     .hero-content h1 {
         font-size: 3.5rem;
@@ -285,10 +338,11 @@ iframe {
         font-size: 1.4rem;
     }
     .navbar-collapse {
-        background-color: var(--dark-background);
+        background-color: var(--header-bg); /* Collapse menu background always solid */
         padding-bottom: 10px;
         margin-top: 10px;
         border-radius: 5px;
+        box-shadow: 0 4px 15px var(--shadow-medium);
     }
     .navbar-nav .nav-link {
         padding: 0.75rem 0;
@@ -308,6 +362,11 @@ iframe {
     }
     .page-header p.lead {
         font-size: 1.1rem;
+    }
+    /* Footer for small screens: Stacked */
+    .footer-simple-bg .powered-by {
+        text-align: left; /* Align both left when stacked */
+        margin-top: 5px; /* Small space between them */
     }
 }
 
