@@ -84,12 +84,14 @@ h1, h2, h3, h4, h5, h6 {
 body.home-page .navbar {
     background-color: transparent !important;
     box-shadow: none !important; /* Remove shadow */
+    /* No padding-top adjustment needed here as body already handles it */
 }
 
 body.home-page .navbar-brand .brand-text,
 body.home-page .navbar-nav .nav-link {
     color: #ffffff !important; /* Ensure white text on banner */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* Add subtle shadow for readability over image */
+    /* STRONGER TEXT SHADOW for better visibility on varying banner backgrounds */
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.9), -1px -1px 5px rgba(0,0,0,0.9);
 }
 
 body.home-page .navbar-nav .nav-link:hover,
