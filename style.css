@@ -20,9 +20,15 @@ body {
     color: var(--text-color);
     line-height: 1.7;
     overflow-x: hidden; /* Prevent horizontal scroll on mobile */
-    padding-top: 76px; /* Space for the fixed-top navbar */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition, though theme won't change now */
+    padding-top: 0; /* REMOVED GLOBAL PADDING-TOP */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Apply padding-top ONLY to pages that are NOT home-page */
+body:not(.home-page) {
+    padding-top: 76px; /* Space for the fixed-top navbar on internal pages */
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
@@ -82,15 +88,13 @@ body.home-page .navbar-nav .nav-link.active {
     background-color: rgba(255, 255, 255, 0.15); /* Slightly stronger highlight for transparent nav */
 }
 
-/* REMOVED: Theme Toggle Button Styling */
-
 
 /* Hero Section (Only on index.html) */
 .hero-bg {
     background-image: url('https://sirsyedcollege.ac.in/public/img/images/banner.jpg');
     background-size: cover;
     background-position: center;
-    min-height: 650px;
+    min-height: 100vh; /* IMPORTANT: Changed to 100vh to ensure it fills the viewport */
     position: relative;
     display: flex;
     align-items: center;
@@ -170,4 +174,75 @@ body.home-page .navbar-nav .nav-link.active {
     font-size: 2.5rem;
     margin: 0 15px;
     transition: color 0.3s ease, transform 0.3s ease;
-    text-shadow: 2px 2px
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.social-icon-link:hover {
+    color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+
+/* Main Content Sections (General for all pages) */
+main {
+    position: relative;
+    z-index: 500;
+    background-color: var(--body-bg); /* Use theme variable */
+}
+
+main section {
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-base); /* Use theme variable */
+    margin-bottom: 60px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth theme transition */
+}
+
+main section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--shadow-medium); /* Use theme variable */
+}
+
+.bg-white-panel {
+    background-color: var(--panel-bg-white); /* Use theme variable */
+}
+
+.bg-light-panel {
+    background-color: var(--panel-bg-light); /* Use theme variable */
+    border: 1px solid color-mix(in srgb, var(--panel-bg-light) 90%, black); /* Border adapts to theme */
+}
+
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    color: var(--primary-theme-color); /* Use theme variable */
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--accent-color); /* Use theme variable */
+    margin: 15px auto 0;
+    border-radius: 3px;
+    transform: scaleX(0.8);
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth theme transition */
+}
+
+.section-title:hover::after {
+    transform: scaleX(1);
+}
+
+/* Page Header for internal pages (e.g., About, Suggest) */
+.page-header {
+    background-color: var(--panel-bg-white); /* Use theme variable */
+    margin-top: 20px;
+    padding: 60px 40px !important;
+    transition: background-color 0.3s ease; /* Smooth theme transition */
+}
+
+.page-header h1 {
+    font-size: 3.5rem
