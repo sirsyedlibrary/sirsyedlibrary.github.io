@@ -2,7 +2,7 @@
 :root {
     --primary-color: #004d99; /* Deep, academic blue */
     --secondary-color: #3498db; /* Vibrant blue for accents/buttons */
-    --dark-background: #2c3e50; /* Rich dark blue-grey for header/footer */
+    --dark-background: #2c3e50; /* Rich dark blue-grey for solid header/footer */
     --light-background: #f5f7fa; /* Very subtle light grey background */
     --panel-white: #ffffff; /* Pure white for content panels */
     --panel-light: #fefefe; /* Off-white for alternating panels */
@@ -19,7 +19,7 @@ body {
     color: var(--text-dark);
     line-height: 1.7;
     overflow-x: hidden; /* Prevent horizontal scroll on mobile */
-    padding-top: 76px; /* Space for fixed-top navbar */
+    /* Removed padding-top here as navbar is now inside hero and then becomes fixed */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,10 +28,14 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-/* Navbar Styling */
-.bg-main-dark {
-    background-color: var(--dark-background) !important;
-    box-shadow: 0 4px 15px var(--shadow-light);
+/* Navbar Styling - Initial Transparent State */
+.navbar {
+    position: absolute; /* Positioned over the hero section */
+    top: 0;
+    left: 0;
+    z-index: 1050; /* Above hero content and overlay */
+    background-color: transparent !important; /* Start transparent */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease; /* Smooth transition */
 }
 
 .navbar-brand .logo-img {
@@ -40,16 +44,18 @@ h1, h2, h3, h4, h5, h6 {
     filter: drop-shadow(0px 0px 5px rgba(255,255,255,0.3)); /* Subtle glow for white logo */
 }
 
-.navbar-brand {
+.navbar-brand .brand-text {
     font-weight: 700;
     font-size: 1.6rem;
-    color: var(--text-light) !important;
+    color: var(--text-light) !important; /* White text for brand */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Subtle shadow for readability */
 }
 
+
 .navbar-nav .nav-link {
-    color: var(--text-light) !important;
+    color: var(--text-light) !important; /* White links initially */
     font-weight: 500;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     padding: 0.75rem 1.2rem;
     border-radius: 5px;
 }
@@ -57,23 +63,44 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
     color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle highlight on hover */
     transform: translateY(-2px);
 }
+
+/* Navbar Scrolled State (Added by JavaScript) */
+.scrolled-nav {
+    position: fixed !important; /* Sticks to top */
+    top: 0;
+    background-color: var(--dark-background) !important; /* Becomes solid dark */
+    box-shadow: 0 4px 15px var(--shadow-light);
+    animation: slideInDown 0.5s ease-out; /* Smooth entrance */
+}
+
+.scrolled-nav .navbar-brand .brand-text {
+    color: var(--text-light) !important; /* Maintain white for brand */
+    text-shadow: none; /* Remove shadow when solid */
+}
+
+.scrolled-nav .navbar-nav .nav-link {
+    color: var(--text-light) !important; /* Keep links white on solid bg */
+}
+
 
 /* Hero Section */
 .hero-bg {
     background-image: url('https://sirsyedcollege.ac.in/public/img/images/banner.jpg');
     background-size: cover;
     background-position: center;
-    min-height: 550px; /* Increased height for impact */
+    min-height: 600px; /* Increased height for even more impact */
     position: relative;
     display: flex;
+    flex-direction: column; /* Allows navbar and content to stack */
     align-items: center;
-    justify-content: center;
-    padding: 80px 0;
+    justify-content: flex-start; /* Aligns content from top (navbar first) */
+    padding-top: 0; /* No initial padding as navbar handles it */
+    padding-bottom: 80px; /* Padding for content below navbar */
     text-align: center;
-    color: #ffffff; /* Ensure white text */
+    color: #ffffff;
     box-shadow: 0 10px 30px var(--shadow-medium);
 }
 
@@ -91,19 +118,20 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     z-index: 1; /* Bring content above overlay */
     max-width: 900px;
+    padding-top: 80px; /* Push content down below initial navbar area */
 }
 
 .hero-content h1 {
-    font-size: 4rem; /* Larger heading */
+    font-size: 4.2rem; /* Even larger heading */
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 20px;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7); /* Stronger text shadow for readability */
-    color: #ffffff; /* Explicitly white */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    color: #ffffff;
 }
 
 .hero-content p {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--text-light);
     max-width: 750px;
     margin: 0 auto 3rem auto;
@@ -120,30 +148,38 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5); /* More prominent shadow */
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .btn-main-accent:hover {
-    background-color: #2980b9; /* Slightly darker accent on hover */
+    background-color: #2980b9;
     border-color: #2980b9;
-    transform: translateY(-5px); /* More pronounced lift */
+    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(52, 152, 219, 0.7);
 }
 
-/* Section Card Styling */
+/* Main Content Sections */
+main {
+    position: relative; /* For z-index stacking if needed */
+    z-index: 500; /* Ensure main content is above fixed navbar when scrolling */
+    background-color: var(--light-background); /* Continues the page background */
+    margin-top: -80px; /* Pull content up to overlap hero slightly for smooth transition */
+    padding-top: 80px; /* Re-add padding within main */
+}
+
 main section {
     padding: 50px;
-    border-radius: 15px; /* Softer, larger rounded corners */
-    box-shadow: 0 10px 30px var(--shadow-light); /* Softer, more modern shadow */
-    margin-bottom: 60px; /* More space between sections */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* For animate-on-scroll hover */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-light);
+    margin-bottom: 60px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 main section:hover {
-    transform: translateY(-5px); /* Subtle lift on hover */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .bg-white-panel {
@@ -152,7 +188,7 @@ main section:hover {
 
 .bg-light-panel {
     background-color: var(--panel-light);
-    border: 1px solid #e0e0e0; /* Subtle border for differentiation */
+    border: 1px solid #e0e0e0;
 }
 
 .section-title {
@@ -166,28 +202,27 @@ main section:hover {
 .section-title::after {
     content: '';
     display: block;
-    width: 80px; /* Longer underline */
+    width: 80px;
     height: 5px;
     background-color: var(--secondary-color);
     margin: 15px auto 0;
     border-radius: 3px;
-    transform: scaleX(0.8); /* Slightly squashed for modern look */
+    transform: scaleX(0.8);
     transition: transform 0.3s ease;
 }
 
 .section-title:hover::after {
-    transform: scaleX(1); /* Expands on hover */
+    transform: scaleX(1);
 }
-
 
 /* iframe Styling */
 iframe {
     border: none;
-    border-radius: 12px; /* Consistent rounded corners */
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 6px 20px var(--shadow-light); /* Soft shadow for forms */
+    box-shadow: 0 6px 20px var(--shadow-light);
     margin-top: 30px;
-    background-color: #ffffff; /* Ensure a white background for forms */
+    background-color: #ffffff;
 }
 
 /* Footer Styling */
@@ -229,22 +264,21 @@ iframe {
 }
 
 @media (max-width: 991.98px) {
-    body {
-        padding-top: 66px; /* Adjust for smaller fixed-top navbar */
+    .hero-content h1 {
+        font-size: 3.2rem;
+    }
+    .hero-content p {
+        font-size: 1.3rem;
     }
     .navbar-collapse {
-        text-align: center;
-        background-color: var(--dark-background); /* Background for collapsed menu */
+        background-color: var(--dark-background);
         padding-bottom: 10px;
+        margin-top: 10px; /* Space from toggler */
+        border-radius: 5px;
     }
     .navbar-nav .nav-link {
         padding: 0.75rem 0;
-    }
-    .hero-content h1 {
-        font-size: 3rem;
-    }
-    .hero-content p {
-        font-size: 1.2rem;
+        margin: 0 10px;
     }
     .section-title {
         font-size: 2.2rem;
@@ -252,17 +286,20 @@ iframe {
     main section {
         padding: 40px 30px;
     }
+    .navbar-brand .brand-text {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 767.98px) {
     .hero-bg {
-        min-height: 450px;
+        min-height: 500px;
     }
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
     }
     .hero-content p {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     .btn-main-accent {
         font-size: 1rem;
@@ -277,22 +314,35 @@ iframe {
 }
 
 @media (max-width: 575.98px) {
-    .navbar-brand {
-        font-size: 1.4rem;
-    }
-    .logo-img {
+    .navbar-brand .logo-img {
         height: 40px;
     }
+    .navbar-brand .brand-text {
+        font-size: 1.2rem;
+    }
     .hero-bg {
-        min-height: 400px;
+        min-height: 450px;
     }
     .hero-content h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     .hero-content p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
     .section-title {
         font-size: 1.6rem;
+    }
+    main section {
+        padding: 25px 15px;
+    }
+}
+
+/* Keyframe for slide-in animation */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
     }
 }
