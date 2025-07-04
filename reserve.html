@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Central Library, Sir Syed College - Book Reservation</title>
-    <!-- Google Fonts: Poppins for headings, Open Sans for body text -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Your Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Fixed Top Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top bg-dark-main-static shadow-sm" id="mainNavbar">
         <div class="container-fluid container-xl">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
@@ -26,7 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
@@ -42,36 +37,77 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
+                    <li class="nav-item d-flex align-items-center ms-lg-3">
+                        <div class="form-check form-switch my-auto">
+                            <input class="form-check-input" type="checkbox" role="switch" id="darkModeToggle">
+                            <label class="form-check-label text-white-50 ms-2" for="darkModeToggle">
+                                <i class="bi bi-sun-fill" id="sunIcon"></i>
+                                <i class="bi bi-moon-fill d-none" id="moonIcon"></i>
+                            </label>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <main class="container my-5 pt-5">
-        <!-- Page Header for internal pages -->
         <section class="page-header text-center py-5 mb-5 rounded-3 shadow-sm bg-light-panel">
             <h1 class="display-4 fw-bold">Book Reservation & WhatsApp Number Registration</h1>
             <p class="lead text-muted">Provide your details to get updates on your book reservations.</p>
         </section>
 
-        <!-- Student Registration & WhatsApp Form Section -->
         <section id="student-registration-form" class="mb-5 p-4 rounded-3 shadow-lg bg-white-panel">
             <p class="text-center mb-4">To confirm your book reservation and enable us to send you WhatsApp notifications about book availability, please provide your Admission Number and WhatsApp Number below.</p>
-            <!-- Your WhatsApp Number Collection Google Form Embed -->
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc1GPoTLxu1RONEtlKjHRRAmwaiPuzAZkyaK5d4UVOhz-uGLA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <small class="text-muted d-block text-center mt-3">Your information is used for library communication only and kept confidential.</small>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center text-white py-4 footer-simple-bg">
+    <footer class="text-white py-4 footer-simple-bg">
         <div class="container">
-            <p class="mb-0 copyright">&copy; 2025 Central Library, Sir Syed College. All rights reserved.</p>
-            <p class="mb-0 powered-by">Powered by <a href="https://muhammedsafvankp.github.io" target="_blank" rel="noopener noreferrer">Muhammed Safvan</a></p>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 copyright">&copy; 2025 Central Library, Sir Syed College. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 powered-by">Powered by <a href="https://muhammedsafvankp.github.io" target="_blank" rel="noopener noreferrer">Muhammed Safvan</a></p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS (bundle with Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const themeToggle = document.getElementById('darkModeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        // Function to set the theme
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                themeToggle.checked = true;
+                sunIcon.classList.add('d-none');
+                moonIcon.classList.remove('d-none');
+            } else {
+                themeToggle.checked = false;
+                sunIcon.classList.remove('d-none');
+                moonIcon.classList.add('d-none');
+            }
+        };
+
+        // Check for saved theme preference on load
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        // Listen for toggle changes
+        themeToggle.addEventListener('change', () => {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
 </body>
 </html>
