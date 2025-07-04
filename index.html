@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="home-page"> <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top shadow-sm" id="mainNavbar"> <div class="container-fluid container-xl">
+<body class="home-page"> <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top shadow-sm" id="mainNavbar">
+        <div class="container-fluid container-xl">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
                 <img src="https://sirsyedcollege.ac.in/public/img/logo/logo-new.svg" alt="Sir Syed College Logo" class="logo-img me-2">
                 <span class="d-none d-sm-inline brand-text">Central Library</span>
@@ -69,48 +70,5 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const themeToggle = document.getElementById('darkModeToggle'); // This element won't exist on index.html
-        const sunIcon = document.getElementById('sunIcon');
-        const moonIcon = document.getElementById('moonIcon');
-
-        // Function to set the theme
-        const setTheme = (theme) => {
-            document.documentElement.setAttribute('data-bs-theme', theme);
-            localStorage.setItem('theme', theme);
-            // On index.html, there's no toggle button to check/uncheck
-            // and no sun/moon icons to toggle visibility.
-            // This part of the code will simply not execute for these elements.
-            if (themeToggle) { // Only try to update if toggle exists
-                if (theme === 'dark') {
-                    themeToggle.checked = true;
-                } else {
-                    themeToggle.checked = false;
-                }
-            }
-            if (sunIcon && moonIcon) { // Only try to update if icons exist
-                if (theme === 'dark') {
-                    sunIcon.classList.add('d-none');
-                    moonIcon.classList.remove('d-none');
-                } else {
-                    sunIcon.classList.remove('d-none');
-                    moonIcon.classList.add('d-none');
-                }
-            }
-        };
-
-        // Check for saved theme preference on load
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        setTheme(savedTheme);
-
-        // Listen for toggle changes (This won't happen on index.html as button doesn't exist)
-        if (themeToggle) {
-            themeToggle.addEventListener('change', () => {
-                const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                setTheme(newTheme);
-            });
-        }
-    </script>
-</body>
+    </body>
 </html>
